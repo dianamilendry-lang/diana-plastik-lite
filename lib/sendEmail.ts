@@ -17,6 +17,7 @@ export async function notifyLeadEmail(leadData: {
     productType: string;
     specs: string;
     benefits: string;
+    imageUrl?: string;
   };
 }) {
   if (!process.env.RESEND_API_KEY) {
@@ -27,7 +28,8 @@ export async function notifyLeadEmail(leadData: {
   try {
     const attachments = [];
 
-    if (leadData.technicalSheet) {
+    const ts = leadData.technicalSheet;
+    if (ts) {
       const pdfBuffer = await new Promise<Buffer>((resolve, reject) => {
         try {
           // @ts-ignore
@@ -44,15 +46,15 @@ export async function notifyLeadEmail(leadData: {
           
           // Industry Tag
           doc.rect(400, 55, 140, 30).fill('#eff6ff');
-          doc.fontSize(11).font('Helvetica-Bold').fillColor('#1d4ed8').text(leadData.technicalSheet.industry, 400, 65, { width: 140, align: 'center' });
+          doc.fontSize(11).font('Helvetica-Bold').fillColor('#1d4ed8').text(ts.industry, 400, 65, { width: 140, align: 'center' });
 
           // Layout: Left column (image + title), Right column (specs + benefits)
           let currentY = 140;
 
           // Image
-          if (leadData.technicalSheet.imageUrl) {
+          if (ts.imageUrl) {
             try {
-              const cleanUrl = leadData.technicalSheet.imageUrl.split('?')[0];
+              const cleanUrl = ts.imageUrl.split('?')[0];
               const imgPath = path.join(process.cwd(), 'public', cleanUrl);
               if (fs.existsSync(imgPath)) {
                 doc.image(imgPath, 40, currentY, { fit: [160, 160], align: 'center', valign: 'center' });
@@ -63,15 +65,15 @@ export async function notifyLeadEmail(leadData: {
           }
 
           // Product Title (under image)
-          doc.fontSize(12).font('Helvetica-Bold').fillColor('#0f172a').text(leadData.technicalSheet.productType, 40, currentY + 175, { width: 160, align: 'center' });
+          doc.fontSize(12).font('Helvetica-Bold').fillColor('#0f172a').text(ts.productType, 40, currentY + 175, { width: 160, align: 'center' });
 
           // Right Column (Specs and Benefits)
           doc.fontSize(14).font('Helvetica-Bold').fillColor('#0f172a').text('Especificaciones', 230, currentY);
-          doc.fontSize(11).font('Helvetica').fillColor('#334155').text(leadData.technicalSheet.specs, 230, currentY + 20, { width: 325, align: 'justify' });
+          doc.fontSize(11).font('Helvetica').fillColor('#334155').text(ts.specs, 230, currentY + 20, { width: 325, align: 'justify' });
 
           const benefitsY = doc.y + 25;
           doc.fontSize(14).font('Helvetica-Bold').fillColor('#0f172a').text('Beneficios', 230, benefitsY);
-          doc.fontSize(11).font('Helvetica').fillColor('#334155').text(leadData.technicalSheet.benefits, 230, benefitsY + 20, { width: 325, align: 'justify' });
+          doc.fontSize(11).font('Helvetica').fillColor('#334155').text(ts.benefits, 230, benefitsY + 20, { width: 325, align: 'justify' });
 
           // Footer
           doc.rect(40, 750, 515, 1).fill('#e2e8f0');
