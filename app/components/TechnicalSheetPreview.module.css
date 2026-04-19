@@ -1,0 +1,177 @@
+.container {
+  margin: 1rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: white;
+  color: #111;
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 100%;
+}
+
+.printArea {
+  padding: 24px;
+  background: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.logoInfo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #0056b3;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.logoInfo p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.industryTag {
+  background: #f0f7ff;
+  color: #0056b3;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #d0e3ff;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.imageCol {
+  flex: 0 0 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 160px;
+  background: #f8f9fa;
+  border: 1px dashed #ced4da;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImage {
+  object-fit: contain;
+  padding: 8px;
+}
+
+.productName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.specsCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.specSection {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 3px solid #0056b3;
+}
+
+.specSection h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.specSection p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.footer {
+  margin-top: auto;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.footer p {
+  margin: 2px 0;
+}
+
+.actions {
+  background: #f8f9fa;
+  padding: 12px 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0056b3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.downloadButton:hover {
+  background: #004494;
+}
+
+.downloadButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Print Overrides: Ensure the exported HTML looks identical */
+@media print {
+  .actions {
+    display: none !important;
+  }
+  .container {
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+}
